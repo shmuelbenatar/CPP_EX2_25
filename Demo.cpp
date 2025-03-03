@@ -1,4 +1,4 @@
-#include<square_mat.hpp>
+#include<SquareMat.hpp>
 #include <iostream>
 
 using namespace std;
