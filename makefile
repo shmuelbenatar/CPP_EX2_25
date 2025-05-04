@@ -10,8 +10,8 @@ Main: $(OBJECTS)
 test: $(TESTOBJECTS)
 	$(CXX) $(CXXFLAGS) $(TESTOBJECTS) -o test
 
-valgrind: demo
-	valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes ./demo
+valgrind: Main
+	valgrind --tool=memcheck --leak-check=full --show-leak-kinds=all --track-origins=yes ./Main
 
 clean:
-	rm -f demo test *.o
+	rm -f Main test *.o
