@@ -1,3 +1,5 @@
+
+// email:shmuel.benatar@msmail.ariel.ac.il
 #ifndef SQUAREMAT_H
 #define SQUAREMAT_H
 

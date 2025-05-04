@@ -1,3 +1,5 @@
+
+// email:shmuel.benatar@msmail.ariel.ac.il
 #include "SquareMat.h"
 #include <stdexcept>
 #include <cmath>

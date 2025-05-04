@@ -1,3 +1,5 @@
+// email:shmuel.benatar@msmail.ariel.ac.il
+
 CXX=g++
 CXXFLAGS= -g -Wall -Wextra 
 OBJECTS = SquareMat.cpp main.cpp
