@@ -45,6 +45,7 @@ namespace matrix
             }
         }
     }
+    // Copy constructor
     SquareMat::SquareMat(const SquareMat &other)
     {
         this->size = other.size;
@@ -92,7 +93,7 @@ namespace matrix
 
         return *this;
     }
-    // Destructor
+    // Destructor to free memory
     SquareMat::~SquareMat()
     {
         if (mat)
@@ -448,6 +449,7 @@ namespace matrix
         }
         return result;
     }
+    // Enables scalar multiplication from the left (e.g., 2 * matrix)
     SquareMat operator*(double a, SquareMat &other)
     {
         return other * a;
