@@ -9,8 +9,8 @@ namespace matrix
     {
     public:
         SquareMat();
-        SquareMat(int size);
-        SquareMat(int size, double values[]);
+        SquareMat(size_t size);
+        SquareMat(size_t size, double values[]);
         SquareMat(const SquareMat &other);
 
         SquareMat &operator=(const SquareMat &other);
@@ -30,7 +30,7 @@ namespace matrix
 
         SquareMat operator/(double scalar) const;
 
-        SquareMat operator^(int scalar) const;
+        SquareMat operator^(int power) const;
 
         SquareMat &operator++(); // post-increment
         SquareMat &operator--(); // post-increment
@@ -39,7 +39,7 @@ namespace matrix
         SquareMat operator--(int); // pre-increment
 
         SquareMat operator~() const;
-        double *operator[](int i);
+        double *operator[](size_t i);
 
         friend SquareMat operator*(double a, SquareMat &other);
 
@@ -52,19 +52,19 @@ namespace matrix
         bool operator>(const SquareMat &other) const;
 
         double operator!();
-
-        SquareMat &operator+=(SquareMat &other);
-        SquareMat &operator-=(SquareMat &other);
-        SquareMat &operator*=(SquareMat &other);
-        SquareMat &operator%=(SquareMat &other);
+ 
+        SquareMat &operator+=(const SquareMat &other);
+        SquareMat &operator-=(const SquareMat &other);
+        SquareMat &operator*=(const SquareMat &other);
+        SquareMat &operator%=(const SquareMat &other);
         SquareMat &operator*=(double scalar);
-        SquareMat &operator%=(double scalar);
+        SquareMat &operator%=(int scalar);
 
         friend std::ostream &operator<<(std::ostream &os, const SquareMat &matrix);
 
     private:
         double **mat;
-        int size;
+        size_t size;
     };
 
     SquareMat operator*(double a, SquareMat &other);
