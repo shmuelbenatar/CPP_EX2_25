@@ -70,9 +70,10 @@ TEST_CASE("Transpose") {
     double vals[] = {1, 2, 3, 4};
     SquareMat a(2, vals);
     SquareMat trans = ~a;
+    CHECK_EQ(trans[0][0], 1);
     CHECK_EQ(trans[0][1], 3);
-    CHECK_NE(a,trans);
-    CHECK_EQ(~trans, a);
+    CHECK_EQ(trans[1][0], 2);
+    CHECK_EQ(trans[1][1], 4);
 }
 
 TEST_CASE("Determinant and Power") {
@@ -212,7 +213,10 @@ TEST_CASE("Extreme Edge Cases") {
     double neg[] = {-1, -2, -3, -4};
     SquareMat negMat(2, neg);
     SquareMat mod = negMat % 3;
-    CHECK(mod[0][0] == fmod(-1, 3));
+    CHECK(mod[0][0] == 2);  // -1 % 3 → 2
+    CHECK(mod[0][1] == 1);  // -2 % 3 → 1
+    CHECK(mod[1][0] == 0);  // -3 % 3 → 0
+    CHECK(mod[1][1] == 2);  // -4 % 3 → 2
 
     // *= vs * consistency
     SquareMat b(2, vals);

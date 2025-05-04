@@ -124,8 +124,8 @@ namespace matrix
     // compare operators
     bool SquareMat::operator==(const SquareMat &other) const
     {
-        long long sum_a = 0;
-        long long sum_b = 0;
+        long double sum_a = 0;
+        long double sum_b = 0;
 
         for (size_t i = 0; i < size; i++)
         {
@@ -150,8 +150,8 @@ namespace matrix
     bool SquareMat::operator<=(const SquareMat &other) const { return !(*this > other); }
     bool SquareMat::operator<(const SquareMat &other) const
     {
-        long long sum_a = 0;
-        long long sum_b = 0;
+        long double sum_a = 0;
+        long double sum_b = 0;
 
         for (size_t i = 0; i < size; i++)
         {
