@@ -128,6 +128,49 @@ TEST_CASE("Modulo and Exceptions") {
     CHECK_THROWS(a / 0);
 }
 
+TEST_CASE("Testing operator^ for matrix exponentiation") {
+    double values[] = {1, 2, 0, 1};
+    SquareMat m(2, values);
+    SquareMat m2 = m ^ 2;
+    CHECK(m2[0][0] == 1*1 + 2*0);
+    CHECK(m2[0][1] == 1*2 + 2*1);
+    CHECK(m2[1][0] == 0*1 + 1*0);
+    CHECK(m2[1][1] == 0*2 + 1*1);
+}
+
+TEST_CASE("Testing operator% with scalar including negatives") {
+    double values[] = {5.5, -3.5, -7.2, 2.1};
+    SquareMat m(2, values);
+    SquareMat mod = m % 3;
+    CHECK(mod[0][0] >= 0);
+    CHECK(mod[0][1] >= 0);
+    CHECK(mod[1][0] >= 0);
+    CHECK(mod[1][1] >= 0);
+}
+
+TEST_CASE("Matrix comparison by element sum") {
+    double a[] = {1, 2, 3, 4};
+    double b[] = {10, 0, 0, 0}; // sum is 10 for both
+    SquareMat m1(2, a);
+    SquareMat m2(2, b);
+    CHECK(m1 == m2);
+    CHECK_FALSE(m1 != m2);
+    CHECK_FALSE(m1 < m2);
+    CHECK(m1 <= m2);
+    CHECK_FALSE(m1 > m2);
+    CHECK(m1 >= m2);
+}
+
+TEST_CASE("Testing operator/= across all matrix elements") {
+    double a[] = {4, 8, 12, 16};
+    SquareMat m(2, a);
+    m /= 4;
+    CHECK(m[0][0] == doctest::Approx(1));
+    CHECK(m[0][1] == doctest::Approx(2));
+    CHECK(m[1][0] == doctest::Approx(3));
+    CHECK(m[1][1] == doctest::Approx(4));
+}
+
 TEST_CASE("Edge Cases") {
     // Zero matrix
     SquareMat zero(2);

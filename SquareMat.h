@@ -42,6 +42,7 @@ namespace matrix
 
         SquareMat operator~() const;
         double *operator[](size_t i);
+        const double *operator[](size_t i) const;
 
         friend SquareMat operator*(double a, SquareMat &other);
 

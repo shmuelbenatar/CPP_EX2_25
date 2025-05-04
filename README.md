@@ -1,96 +1,72 @@
-<div dir="rtl">
+# README - Assignment 2: Square Matrix Operator Overloading
 
-# מטלה מספר 2 - מימוש אופרטורים עבור מטריצות ריבועיות
+## Student Details:
 
-### יושרה אקדמית
-
-במהלך העבודה על המטלות, מותר להתייעץ עם סטודנטים אחרים ולחפש מידע באינטרנט. עם זאת, חל איסור להעתיק קטעי קוד שלמים ממקורות חיצוניים, כולל סטודנטים אחרים, אתרי אינטרנט ומודלי בינה מלאכותית (כגון ChatGPT).
-
-יש לדווח על כל עזרה שקיבלתם, בין אם מדובר בהתייעצות עם סטודנטים אחרים או במידע שנמצא באינטרנט, בהתאם ל[תקנון היושר של המחלקה](https://www.ariel.ac.il/wp/cs/wp-content/uploads/sites/88/2020/08/Guidelines-for-Academic-Integrity.pdf).
-**במקרה של שימוש בכלי בינה מלאכותית (AI), יש לצרף את הפרומפטים שהוזנו ואת התשובות שהתקבלו**.
-
------
-* **מטרת המטלה:** הבנת החומר הנלמד בהרצאות הרביעית והחמישית, כגון: העמסת אופרטורים, פונקציות חברות וכלל השלושה.
-* **שימו לב!**  גם במטלה זו **אסור** להשתמש בספרייה הסטנדרטית, ניתן להשתמש במערך. **זאת אומרת תצטרכו לממש מבנה/י נתונים המתאים לצרכי המטלה**. כל המיכלים הסטנדרטיים כולל vector או stack *אינם זמינים* לכם במטלה זו.
-* **שימו לב!** ההגשה של המטלה ביחידים.
+**Name:** \[Shmuel BenAtar]
+**Email:** [shmuel.benatar@msmail.ariel.ac.il](mailto:shmuel.benatar@msmail.ariel.ac.il)
 
 ---
 
-## הוראות הגשה ב Moodle:
+## Project Overview
 
-במערכת Moodle יש להגיש **קובץ טקסט למשל (`submission.txt`)** המכיל 3 שורות בפורמט הבא:
+This project implements a `SquareMat` class to represent and manipulate square matrices of real numbers.
+The assignment demonstrates object-oriented programming concepts, including:
 
-1. **תעודת זהות** – מספר תעודת הזהות של הסטודנט.
-2. **קישור להגשה** – קישור למאגר ה-GitHub שבו נמצא הפרויקט.
-3. **פרטי ה-commit האחרון** – המחרוזת המזהה של ה-commit האחרון (`commit hash`) 
-
- - דוגמה לקובץ הגשה תקין:
-```
-123456789
-https://github.com/example-user/assignment
-e3f1c1a 
-```
+* Operator overloading (arithmetic, logical, unary, and compound operators)
+* Memory management using dynamic 2D arrays
+* The Rule of Three (constructor, copy constructor, and assignment operator)
+* Exception handling for invalid inputs
 
 ---
 
-עבר הרבה זמן מאז שסיימתם את הקורס אלגברה לינארית :-) 
-כדי לעורר בכם נוסטלגיה, במטלה הזאת אתם תממשו מחלקה המייצגת **מטריצות ריבועיות** של מספרים ממשיים.
+## File Structure
+
+* `SquareMat.h` – Header file defining the `SquareMat` class and its methods
+* `SquareMat.cpp` – Implementation of all class methods and operator overloads
+* `TestSquareMat.cpp` – Unit tests using the `doctest` framework
+* `main.cpp` – A sample demonstration file for manual testing
+* `Makefile` – Compilation and automation commands (see below)
 
 ---
 
-## דרישות המטלה:
+## Implemented Operators
 
-### מימוש המחלקות הבאות:
-
-הוסיפו את המחלקות במרחב שמות (namespace) חדש לבחירתכם.
-
-#### מחלקה בשם `SquareMat`:
-המטריצה היא מטריצה ריבועית המכילה מספרים ממשיים. עבור קלט לא תקין יש לזרוק חריגה.
-המחלקה תכיל את המטריצה וכן את הפונקציות הבאות:
-
-- אופרטורי חיבור וחיסור (`mat1+mat2`,`mat2-mat1`) - מבצעים חיבור/חיסור איברים בהתאם למקומם בין שתי מטריצות בעלות אותו גודל.
-- אופרטור מינוס אונארי (`mat-`) - הופך את סימן כל האיברים במטריצה (חיובי לשלילי ולהפך).
-- אופרטור כפל (`mat2*mat1`) - מבצע [כפל בין 2 מטריצות](https://he.wikipedia.org/wiki/%D7%9B%D7%A4%D7%9C_%D7%9E%D7%98%D7%A8%D7%99%D7%A6%D7%95%D7%AA).
-- אופרטור כפל בסקלר (`scalar*matrix` וגם `matrix*scalar`)
-- כפל איברי (`%`) - מכפיל כל איבר במטריצה אחת באיבר המתאים במטריצה השנייה (כלומר, האופרטור מקבל מטריצה כקלט, על המטריצה להיות באותו סדר גודל של המטריצה הנתונה).
-- מודולו עם סקלר (`%`) - מבצע פעולה של מודולו על כל איבר במטריצה עם מספר שלם נתון (כלומר, האופרטור מקבל מספר שלם כקלט ומחשב את המודולו של כל איבר במטריצה עם המספר הנתון).
-- חילוק בסקלר (`/`) - מחלק כל איבר במטריצה במספר סקלרי.
-- אופרטור חזקה (`^`) - מעלה את המטריצה בחזקה על ידי כפל חוזר של המטריצה בעצמה.
-- אופרטורי הגדלה והקטנה ב-1 (`++`, `--`) - מגדילים או מקטינים את כל איברי המטריצה באחד (ממשו גם preincrement וגם postincrement).
-- אופרטור Transpose (`~`) - משחלף את המטריצה: מחליף את השורות בעמודות של המטריצה.
-- אופרטור גישה לאיברים באמצעות אינדקס (`[]`) - מאפשר גישה ישירה לאיבר ספציפי במטריצה על ידי שימוש באינדקסים לדוגמה`[j][i]`. אפשרו גישה גם לצורך עדכון של איבר במטריצה.
-- אופרטורי שוויון ואי-שוויון (`==`,`=!`) - במטלה הזאת מטריצות הן שוות אם סכום האיברים שלהם זהה.
-- אופרטורי השוואה (`<`, `>`, `=>`, `=<`) - משווה בין שתי מטריצות. מטריצה א' גדולה ממטריצה ב' אם סכום האיברים של מטריצה א' גדול מסכום האיברים של מטריצה ב'.
-- אופרטור דטרמיננטה - (`!`) - מחשב את הדטרמיננטה של המטריצה.
-- אופרטורי השמה משולבים (`mat2+=mat1`, `=-`, `=*`, `=/`, `=%`)  - מבצעים פעולות של חיבור, חיסור, כפל, חלוקה או מודולו על המטריצה ומעדכנים אותה ישירות (שימו לב שבמקרה של האופרטורים `=%` ו-`=*` יש לממש שני אופרטורים).
-- אופרטור פלט - (`>>`) - מדפיס את המטריצה בצורה הגיונית.
-
-* יש לבדוק את תקינות הקלט ולזרוק שגיאות במידת הצורך. בנוסף עליכם לכתוב טסטים לכל הפונקציות שכתבתם.
-
+* Arithmetic operators: `+`, `-`, `*`, `/`, `%`, `^`
+* Scalar operations: `matrix * scalar`, `scalar * matrix`, `matrix % int`, `matrix / scalar`
+* Unary operators: `-matrix`, `++`, `--`, transpose `~`, determinant `!`
+* Assignment operators: `+=`, `-=`, `*=`, `/=`, `%=`
+* Comparison operators: `==`, `!=`, `<`, `>`, `<=`, `>=` (based on sum of matrix elements)
+* Element access: `matrix[i][j]`
+* Output stream: `operator<<`
 
 ---
 
+## Testing
 
-#### דרישות נוספות:
+Extensive unit tests were written using `doctest`. Tests include:
 
-- חשוב לוודא שה-repository ציבורי.
-- כתבו בתחילת **כל** קובץ את כתובת המייל שלכם.
-- כתבו קוד נקי, מסודר, מחולק לקבצים, מודולרי, מתועד בצורה מספקת וכמובן בדיקות יחידה עבור כל הפונקציות.
-- בדקו את תקינות הקלט ולזרוק חריגות מתאימות במידת הצורך.
-- לשימושכם הקישור הבא [doctest](https://github.com/doctest/doctest) בו תוכלו לראות דוגמאות נוספות לשימוש בסיפריה זו.
-- יש לבדוק שאין זליגת זיכרון באמצעות `valgrind`.
-- יש לצרף גם קובץ `README` עם הסבר על פרויקט, על חלוקה למחלקות וקבצים וכל מידע אחר רלוונטי.
+* Matrix arithmetic and scalar operations
+* Equality and comparison based on element sum
+* Edge cases (e.g., modulo with negative values, power of matrix)
+* Division, transpose, and validation of operator behavior
 
+---
 
-#### קובץ `Makefile`:
-הוסיפו לפרויקט קובץ `Makefile` הכולל את הפקודות הבאות:
-- הפקודה `make Main` – להרצת קובץ ההדגמה.
-- הפקודה `make test` – להרצת בדיקות היחידה.
-- הפקודה `make valgrind` – בדיקת זליגת זיכרון באמצעות valgrind.
-- הפקודה `make clean` - מוחקת את כל הקבצים הלא רלוונטיים לאחר ההרצה.
+## Compilation & Execution
 
+The `Makefile` provides the following commands:
 
-בהצלחה!
+* `make Main` – Compiles the main demonstration program
+* `make test` – Compiles and runs the unit tests
+* `make valgrind` – Checks for memory leaks using Valgrind
+* `make clean` – Removes compiled binaries and temporary files
 
+---
 
-</div>
+## Additional Notes
+
+* The implementation does **not** use STL containers such as `vector` or `stack`, as per the assignment rules.
+* Matrices are managed via dynamic 2D arrays (`double**`) with proper memory cleanup.
+* Input validation and exception handling are integrated where appropriate.
+
+---

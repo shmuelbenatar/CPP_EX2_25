@@ -116,7 +116,11 @@ namespace matrix
         else
             throw std::invalid_argument("Index is out of bounds");
     };
-
+    const double *SquareMat::operator[](size_t i) const
+    {
+        if (i >= size) throw std::invalid_argument("row index out of range");
+        return mat[i];
+    }
     // compare operators
     bool SquareMat::operator==(const SquareMat &other) const
     {
@@ -384,7 +388,7 @@ namespace matrix
     {
         if (power < 0)
             throw std::invalid_argument("Negative exponent not supported.");
-
+        if (size == 0) throw std::logic_error("Empty matrix");
         SquareMat temp(size);
         for (size_t i = 0; i < size; ++i)
             for (size_t j = 0; j < size; ++j)
@@ -426,19 +430,23 @@ namespace matrix
         return det;
     }
 
-    SquareMat SquareMat::operator%(int scalar) const
-    {
-        SquareMat temp(*this);
-
-        for (size_t i = 0; i < size; i++)
-        {
-            for (size_t j = 0; j < size; j++)
-            {
-                temp[i][j] = fmod(mat[i][j], scalar);
+    // Applies modulo to each element in the matrix, ensuring the result is always in the range [0, scalar).
+    // Since std::fmod retains the sign of the dividend (val), negative values could result in negative remainders.
+    // To fix this, we use the formula: fmod(fmod(val, scalar) + scalar, scalar)
+    // Example: if val = -3.5 and scalar = 5:
+    //     fmod(-3.5, 5) = -3.5
+    //     -3.5 + 5 = 1.5
+    //     fmod(1.5, 5) = 1.5 → result is positive and within the expected range
+    SquareMat SquareMat::operator%(int scalar) const {
+        if (scalar == 0) throw std::invalid_argument("Modulo by zero");
+        SquareMat result(size);
+        for (size_t i = 0; i < size; ++i) {
+            for (size_t j = 0; j < size; ++j) {
+                double val = mat[i][j];
+                result.mat[i][j] = std::fmod(std::fmod(val, scalar) + scalar, scalar);
             }
         }
-
-        return temp;
+        return result;
     }
     SquareMat operator*(double a, SquareMat &other)
     {
