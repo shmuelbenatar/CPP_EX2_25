@@ -32,11 +32,11 @@ namespace matrix
 
         SquareMat operator^(int power) const;
 
-        SquareMat &operator++(); // post-increment
-        SquareMat &operator--(); // post-increment
+        SquareMat &operator++(); // pre-increment
+        SquareMat &operator--(); // pre-increment
 
-        SquareMat operator++(int); // pre-increment
-        SquareMat operator--(int); // pre-increment
+        SquareMat operator++(int); // post-increment
+        SquareMat operator--(int); // post-increment
 
         SquareMat operator~() const;
         double *operator[](size_t i);
@@ -59,6 +59,7 @@ namespace matrix
         SquareMat &operator%=(const SquareMat &other);
         SquareMat &operator*=(double scalar);
         SquareMat &operator%=(int scalar);
+        SquareMat &operator/=(double scalar);
 
         friend std::ostream &operator<<(std::ostream &os, const SquareMat &matrix);
 

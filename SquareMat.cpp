@@ -123,7 +123,7 @@ namespace matrix
 
         for (size_t i = 0; i < size; i++)
         {
-            for (size_t j = 0; i < size; i++)
+            for (size_t j = 0; j < size; j++)
             {
                 sum_a += mat[i][j];
             }
@@ -131,7 +131,7 @@ namespace matrix
 
         for (size_t i = 0; i < other.size; i++)
         {
-            for (size_t j = 0; i < other.size; i++)
+            for (size_t j = 0; j < other.size; j++)
             {
                 sum_b += other.mat[i][j];
             }
@@ -250,6 +250,16 @@ namespace matrix
     {
 
         *this = *this % scalar;
+        return *this;
+    }
+    SquareMat &SquareMat::operator/=(double scalar)
+    {
+        if (scalar == 0)
+            throw std::invalid_argument("Division by zero.");
+
+        for (size_t i = 0; i < size; ++i)
+            for (size_t j = 0; j < size; ++j)
+                mat[i][j] /= scalar;
         return *this;
     }
 
